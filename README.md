@@ -1,20 +1,81 @@
-# ResearchPapersQuery - PubMed Fetcher CLI
+# Biopharma Research Paper Fetcher
 
-A Python CLI tool for retrieving **PubMed articles** with **non-academic authors** affiliated with **pharmaceutical, biotech, life sciences, and medical companies**. Built using Poetry for dependency management and packaged for easy command-line use.
+**Author:** Abhinit Sundar  
+**Email:** aks94@njit.edu  
 
----
+## Overview
 
-## Features for PubMed Program
+This project provides a command-line tool to fetch and filter PubMed research papers. It is designed to extract papers with **at least one non-academic author affiliated with biotech/pharmaceutical companies**, excluding institutional or academic affiliations.
 
-- Supports full **PubMed query syntax**
-- Filters articles by **corporate vs. academic affiliation**
-- Extracts **PubMed ID, title, publication year, non-academic authors, company affiliations, and corresponding author email**
-- Outputs results in **CSV format**
+## Features
 
----
+- Query PubMed using full advanced syntax
+- Extract metadata from MEDLINE format:
+  - PubMed ID
+  - Title
+  - Publication Year
+  - Non-academic Author(s)
+  - Company Affiliation(s)
+  - Corresponding Author Email
+- Filters out academic or institutional affiliations
+- Outputs structured CSV reports
+- CLI interface via `poetry run`
+- Fully typed, modular, and maintainable code
 
-## Query Used for PubMed Fetcher Project
+## Technologies
+
+- Python 3.9+
+- [Biopython](https://biopython.org/)
+- [Pandas](https://pandas.pydata.org/)
+- [TQDM](https://tqdm.github.io/)
+- Poetry for dependency and packaging management
+
+## Installation
 
 ```bash
-!poetry run get-papers-list "(pharmaceutical OR biotech OR biotechnology OR pharma OR drug development OR biopharmaceutical OR life sciences OR medical company) AND (affiliation[Affiliation])" -f filteredPubMedArticles.csv
+# Install Poetry
+curl -sSL https://install.python-poetry.org | python3 -
 
+# Clone the repository
+git clone https://github.com/asundar0128/ResearchPapersQuery.git
+cd ResearchPapersQuery/pubmed_fetcher_project
+
+# Install dependencies
+poetry install
+```
+
+## Usage
+
+Run the CLI with your PubMed query:
+
+```bash
+poetry run get-papers-list "(pharmaceutical OR biotech OR life sciences) AND affiliation[Affiliation]" -f filteredPubMedArticles.csv
+```
+
+Enable debug mode to see detailed log output:
+
+```bash
+poetry run get-papers-list "pharma AND affiliation[Affiliation]" -d
+```
+
+## Sample Output
+
+```csv
+PubmedID,Title,Publication Date,Non-academic Author(s),Company Affiliation(s),Corresponding Author Email
+12345678,Innovative Drug Targeting,2022,John Doe; Jane Smith,ABC Biotech; XYZ Pharma,john.doe@abcbiotech.com
+```
+
+## Test Query Example
+
+```bash
+poetry run get-papers-list "(pharmaceutical OR biotech OR drug development) AND affiliation[Affiliation]" -f filteredPubMedArticles.csv
+```
+
+## Results
+
+- Total Articles Fetched: 55  
+- Articles with Corporate Affiliations: 55  
+
+## License
+
+This project is open source and licensed under the MIT License.
